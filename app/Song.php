@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
 
-    // todo: add relationships -mike 11/12/2017
+    public function sku()
+    {
+        return $this->belongsTo(Sku::class);
+    }
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
 
 }

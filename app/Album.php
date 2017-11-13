@@ -7,6 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
 
-    // todo: add relationships -mike 11/12/2017
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
+
+    // TODO: Add necessary pivot table and revisit this relation. -Ben
+    /*
+    public function genres()
+    {
+
+    }
+    */
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
+    }
 
 }

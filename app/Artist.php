@@ -7,6 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Artist extends Model
 {
 
-    // todo: add relationships -mike 11/12/2017
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_code', 'code');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

@@ -14,6 +14,9 @@ class Country extends Model
      */
     public $timestamps = false;
 
-    // todo: add relationships -mike 11/12/2017
+    public function artists()
+    {
+        return $this->hasMany(Artist::class);
+    }
 
 }
