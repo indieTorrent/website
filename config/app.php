@@ -177,6 +177,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Ours
+         */
+        App\Songs\Providers\SongsServiceProvider::class,
+
     ],
 
     /*
