@@ -30,8 +30,6 @@
 
     import FeaturedSongs from 'Components/FeaturedSongs.vue';
 
-    require('Resources/assets/js/songs');
-
     export default {
         mixins: [breadcrumbs],
         components: {

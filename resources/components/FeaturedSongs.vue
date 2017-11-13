@@ -20,6 +20,7 @@
 </template>
 <script>
     import { soundManager } from 'soundmanager2';
+    require('Resources/assets/js/songs');
 
     export default {
         data() {
