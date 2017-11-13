@@ -1,0 +1,110 @@
+span.genre {
+  font-family: 'Noto Serif', serif;
+  font-size: 12px;
+}
+
+h3.featured-artist {
+  margin-bottom: 0;
+}
+
+img.featured-artist {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.featured-artist-container {
+  font-size: 12px;
+}
+
+.featured-artist-container .panel-heading {
+  font-weight: 600;
+}
+
+.featured-artist-container ul.featured-songs {
+  display: block;
+  padding-left: 0;
+  margin: 45px 0;
+}
+
+.featured-artist-container ul.featured-songs li {
+  display: block;
+  margin: 5px;
+  text-align: center;
+}
+
+.featured-artist-container .fa {
+  vertical-align: middle;
+  font-size: 450%;
+}
+
+ul.featured-songs .btn.btn-custom {
+  font-size: 16px;
+  width: 80%;
+}
+
+.play-time {
+  font-size: 10px;
+}
+
+.audio-preview-play {
+  cursor: pointer;
+}
+
+.audio-preview-play.playing {
+  color: #3ebf41;
+}
+
+.audio-preview-play.loading {
+  color: orange;
+}
+
+/*******************************************************************************
+* Media Queries
+*******************************************************************************/
+
+@media (min-width: 768px) {
+  .featured-artist-container ul.featured-songs {
+    list-style-type: none;
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  .featured-artist-container ul.featured-songs li {
+    display: table-cell;
+    padding: 5px;
+    margin: 10px;
+    text-align: left;
+  }
+
+  .featured-artist-container ul.featured-songs li.price {
+    width: 10%;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .featured-artist-container ul.featured-songs li.play {
+    width: 10%;
+    text-align: center;
+  }
+
+  .featured-artist-container ul.featured-songs li.title {
+    width: 60%;
+    text-align: left;
+  }
+
+  .featured-artist-container ul.featured-songs li.add {
+    width: 20%;
+    text-align: right;
+  }
+
+  .featured-artist-container .fa {
+    font-size: 250%;
+  }
+
+  ul.featured-songs .btn.btn-custom {
+    font-size: 14px;
+    width: 100%;
+  }
+}

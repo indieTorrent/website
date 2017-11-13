@@ -1,0 +1,64 @@
+.btn {
+  white-space: normal;
+}
+
+.btn.btn-custom {
+  font-size: 10px;
+  vertical-align: middle;
+  font-weight: 600;
+  background-color: hsl(86, 79%, 44%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d0fe6f", endColorstr="#a9f20c");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#d0fe6f), to(#a9f20c));
+  background-image: -moz-linear-gradient(top, #d0fe6f, #a9f20c);
+  background-image: -ms-linear-gradient(top, #d0fe6f, #a9f20c);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d0fe6f), color-stop(100%, #a9f20c));
+  background-image: -webkit-linear-gradient(top, #d0fe6f, #a9f20c);
+  background-image: -o-linear-gradient(top, #d0fe6f, #a9f20c);
+  background-image: linear-gradient(#d0fe6f, #a9f20c);
+  border-color: #a9f20c #a9f20c hsl(86, 79%, 34%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.66);
+  -webkit-font-smoothing: antialiased;
+  white-space: nowrap;
+}
+
+.btn.btn-custom .fa {
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+/*******************************************************************************
+* Media Queries
+*******************************************************************************/
+
+@media (min-width: 768px) {
+  .btn.btn-custom {
+    font-size: 14px;
+  }
+
+  .btn.btn-custom .fa {
+    font-size: 18px;
+  }
+}
+
+.btn-default {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn-default:hover {
+  color: #666;
+  background-color: #cbef4f;
+  border-color: #4cae4c;
+}
+
+.btn .fa {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.btn.left-icon .fa {
+  margin-left: 0;
+}

@@ -1,0 +1,93 @@
+.top-artists-albums-container:first-child h3 {
+
+}
+
+div.featured-album {
+  clear:both;
+  padding: 12px 0;
+  margin-bottom: -1px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.featured-rank {
+  float: left;
+  margin-right: 24px;
+}
+
+.featured-rank a {
+  font-family: "Open Sans Condensed",​ sans-serif;
+  font-size: 54px;
+  line-height: 0.7;
+  vertical-align: middle;
+  font-weight: 800;
+  text-decoration: none;
+  color: #000000;
+}
+
+.featured-image {
+  width: 40px;
+  height: auto;
+}
+
+div.featured-album span.genre {
+  clear: both;
+  font-family: 'Noto Serif', serif;
+  font-size: 12px;
+}
+
+div.featured-album span.genre .genre-label {
+  font-style: italic;
+}
+
+div.featured-album div.genre .genre-link {
+  padding-left: 4px;
+}
+
+.featured-album div.album .album-title {
+  font-family: "Open Sans",​ sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.featured-label {
+  color: orange;
+  text-transform: uppercase;
+}
+
+.featured-label .skinny {
+  font-family: "Open Sans Condensed",​ sans-serif;
+  font-weight: 300;
+}
+
+.featured-container {
+  margin: 20px 0;
+}
+
+.featured-album-container {
+  margin: 40px 0;
+}
+
+.featured-album-item {
+  margin-left: 20px;
+}
+
+/**
+* This rule causes problems unless there are 10+ items in the list.
+
+.featured-album:last-child .featured-album-item .featured-rank a {
+	margin-left: -24px;
+}
+*/
+
+div.album-component-group .image-container {
+  float: left;
+  clear: both;
+  margin-left: -50px;
+}
+
+div.album-component-group.proper-float {
+  overflow: hidden;
+  padding-left: 50px;
+}

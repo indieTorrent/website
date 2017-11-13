@@ -1,7 +1,16 @@
-<pre>
-_____       _____________     ________                               _____
-___(_)____________  /__(_)_______  __/_________________________________  /_
-__  /__  __ \  __  /__  /_  _ \_  /  _  __ \_  ___/_  ___/  _ \_  __ \  __/
-_  / _  / / / /_/ / _  / /  __/  /   / /_/ /  /   _  /   /  __/  / / / /_
-/_/  /_/ /_/\__,_/  /_/  \___//_/    \____//_/    /_/    \___//_/ /_/\__/
-</pre>
+@extends('layouts.main')
+
+@section('title')
+    Home
+@endsection
+
+@section('page-content')
+    <home></home>
+@endsection
+
+@section('scripts')
+    {{-- Just if its needed --}}
+    <script>
+
+    </script>
+@endsection
