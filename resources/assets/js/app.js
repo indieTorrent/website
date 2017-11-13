@@ -21,8 +21,6 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        breadcrumbs: [
-            {path: '/home', text: 'Home'}
-        ]
+        breadcrumbs: []
     }
 });
