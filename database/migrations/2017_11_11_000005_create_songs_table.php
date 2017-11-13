@@ -17,7 +17,8 @@ class CreateSongsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('alt_name')->nullable();
-            $table->unsignedInteger('album_id');
+            // todo: remove nullable() from album_id after relationship is valid -mike 11/12/2017
+            $table->unsignedInteger('album_id')->nullable();
             $table->foreign('album_id')->references('id')->on('albums');
             $table->unsignedTinyInteger('song_order');
             $table->unsignedInteger('sku_id')->nullable();
