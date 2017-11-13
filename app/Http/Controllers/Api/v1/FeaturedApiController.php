@@ -23,11 +23,11 @@ class FeaturedApiController extends Controller
         // todo: how can we make this more dynamic? -mike 11/12/2017
         $ids = [
             1,
-            2,
-            3,
-            4,
             5,
-            6
+            10,
+            20,
+            40,
+            80
         ];
 
         $songs = $this->songs->getSongsByIds($ids);

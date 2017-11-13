@@ -2,18 +2,18 @@
 
 namespace App\Songs\Repositories;
 
-use App\Songs;
+use App\Song;
 use App\Songs\Contracts\SongsInterface;
 
 class SongsRepository implements SongsInterface
 {
 
     /**
-     * @var Songs
+     * @var Song
      */
     private $songs;
 
-    public function __construct(Songs $songs)
+    public function __construct(Song $songs)
     {
         $this->songs = $songs;
     }
