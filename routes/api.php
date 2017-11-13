@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('Api\v1')->group(function() {
+
+    Route::prefix('featured')->group(function() {
+        Route::get('/songs', 'FeaturedApiController@songs');
+        Route::get('/artists', 'FeaturedApiController@artists');
+        Route::get('/albums', 'FeaturedApiController@albums');
+    });
+
+
 });
