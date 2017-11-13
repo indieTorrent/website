@@ -1,5 +1,8 @@
 <?php
 
+use App\Album;
+use App\Sku;
+use App\Song;
 use Faker\Generator as Faker;
 
 /*
@@ -13,11 +16,26 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Songs::class, function (Faker $faker) {
+$factory->define(Song::class, function (Faker $faker) {
+
+    $album_id = $faker->numberBetween(1, Album::count());
 
     return [
         'name' => $faker->company,
-        'alt_name' => $faker->optional(10)->company,
-        'song_order' => $faker->randomDigit,
+        'alt_name' => $faker->company,
+        'album_id' => $album_id,
+        'song_order' => songOrder($album_id),
+        'sku_id' => function() {
+            return factory(Sku::class)->create()->id;
+        },
+        'preview_start' => $faker->numberBetween(0, 60),
+        'is_active' => $faker->boolean(85),
+        'is_in_back_catalog' => $faker->boolean(15),
     ];
 });
+
+function songOrder($album_id)
+{
+    $count = Song::where('album_id', $album_id)->count();
+    return $count + 1;
+}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Genre;
 use Illuminate\Database\Seeder;
 
 class GenresTableSeeder extends Seeder
@@ -11,8 +12,16 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('genres')->insert([
-            'name' => 'Rock',
-        ]);
+        $genres = [
+            'Rock',
+            'Country',
+            'Rap'
+        ];
+
+        foreach ($genres as $genre) {
+            Genre::create([
+                'name' => $genre
+            ]);
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Country;
 use Illuminate\Database\Seeder;
 
 class CountriesTableSeeder extends Seeder
@@ -11,7 +12,7 @@ class CountriesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('countries')->insert([
+        Country::create([
             'code' => 'US',
             'name' => 'United States',
         ]);
