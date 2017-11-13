@@ -27,7 +27,6 @@ class CreateArtistsTable extends Migration
             $table->foreign('donation_sku_id')->references('id')->on('skus');
             $table->unsignedInteger('rank')->nullable();
             $table->boolean('is_active')->default(false);
-            $table->timestamp('submitted_at')->nullable();
             $table->string('approval_key')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->unsignedInteger('approver_id')->nullable();

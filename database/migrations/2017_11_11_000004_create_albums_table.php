@@ -24,7 +24,7 @@ class CreateAlbumsTable extends Migration
             $table->unsignedSmallInteger('genre_id')->nullable();
             $table->foreign('genre_id')->references('id')->on('genres');
             $table->string('description')->nullable();
-            $table->enum('has_explicit_lyrics', ['f', 't']);
+            $table->boolean('has_explicit_lyrics');
             $table->unsignedDecimal('full_album_price', 8, 2)->nullable();
             $table->unsignedInteger('rank')->nullable();
             $table->boolean('is_active')->default(false);

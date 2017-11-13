@@ -11,6 +11,15 @@ class SongsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Songs::class, 10)->create();
+        DB::table('songs')->insert([
+            'name' => 'The Open Road is Lonely',
+            'alt_name' => 'But I Wouldn\'t Know',
+            'album_id' => 1,
+            'song_order' => 1,
+            'sku_id' => 1,
+            'preview_start' => 0,
+            'is_active' => true,
+            'is_in_back_catalog' => false,
+        ]);
     }
 }
