@@ -24,7 +24,7 @@ $factory->define(Album::class, function (Faker $faker) {
         'artist_id' => $artist_id,
         'title' => $faker->company,
         'alt_title' => $faker->company,
-        'type' => 'f', // todo: not sure what to do with this -mike 11/13/2017
+        'type' => 'f', // todo: not sure what to do with this -mike
         'year' => $faker->year('now'),
         'genre_id' => $faker->numberBetween(1, Genre::count()),
         'description' => $faker->sentence(10),

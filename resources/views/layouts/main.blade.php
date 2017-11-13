@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{{-- todo: break this layout up into partials and Vue Components where possible -mike 11/12/2017 --}}
+{{-- todo: break this layout up into partials and Vue Components where possible -mike --}}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -205,7 +205,7 @@
             </div>
             <div class="col-md-4">
                 <div class="grid-item-container">
-                    {{-- todo: create TopFiveArtists.vue -mike 11/12/2017 --}}
+                    {{-- todo: create TopFiveArtists.vue -mike --}}
                     <div class="top-artists-albums-container">
                         <h3 class="featured-label">Top 5 <span class="skinny">Artists</span></h3>
 
@@ -359,7 +359,7 @@
                         </div>
                     </div>
 
-                    {{-- todo: create TopFiveAlbums.vue -mike 11/12/2017 --}}
+                    {{-- todo: create TopFiveAlbums.vue -mike --}}
                     <div class="top-artists-albums-container">
                         <h3 class="featured-label">Top 5 <span class="skinny">Albums</span></h3>
 

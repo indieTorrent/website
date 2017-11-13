@@ -12,7 +12,7 @@ class FeaturedApiController extends Controller
      */
     private $songs;
 
-    // todo: add Albums and Artists -mike 11/12/2017
+    // todo: add Albums and Artists -mike
     public function __construct(SongsInterface $songs)
     {
         $this->songs = $songs;
@@ -20,7 +20,7 @@ class FeaturedApiController extends Controller
 
     public function songs()
     {
-        // todo: how can we make this more dynamic? -mike 11/12/2017
+        // todo: how can we make this more dynamic? -mike
         $ids = [
             1,
             5,
@@ -32,18 +32,18 @@ class FeaturedApiController extends Controller
 
         $songs = $this->songs->getSongsByIds($ids);
 
-        // todo: change static data to dynamic (will need the relationships) -mike 11/12/2017
-        // todo: add migration for table `unq_file_data_flac` -mike 11/12/2017
-        // todo: maybe clean this up with an Laravel Api Resource Collection ? -mike 11/12/2017
+        // todo: change static data to dynamic (will need the relationships) -mike
+        // todo: add migration for table `unq_file_data_flac` -mike
+        // todo: maybe clean this up with an Laravel Api Resource Collection ? -mike
         $response = [];
 
         foreach($songs as $key => $song) {
             $response[$key] = [
                 'id' => $song->id,
                 'name' => $song->name,
-                // 'fileData' => $song->fileData, todo: add relationship -mike 11/12/2017
+                // 'fileData' => $song->fileData, todo: add relationship -mike
                 'playTimeString' => '$song->fileData->playTimeString',
-                // 'sku' => $song->sku todo: add relationship -mike 11/12/2017
+                // 'sku' => $song->sku todo: add relationship -mike
                 'sku' => '$song->sku->id'
             ];
         }

@@ -48,7 +48,7 @@
                                     id: `audioPreview${song.id}`, // optional: provide your own unique id
                                     url: `https://cdn.indiehosting.org/public_media/mp3_preview/${song.id}.mp3`,
 
-                                    // todo: lets do this jQuery stuff in a Vue way -mike 11/12/2017
+                                    // todo: lets do this jQuery stuff in a Vue way -mike
 
                                     onfinish() {
                                         el.removeClass('fa-pause playing').addClass('fa-play-circle-o');
@@ -79,7 +79,7 @@
         },
         methods: {
             getFeaturedSongs() {
-                // todo: examples of api featured endpoints below -mike 11/12/2017
+                // todo: examples of api featured endpoints below -mike
                 // 'api/featured/artists'
                 // 'api/fetaured/albums'
                 // 'api/featured/songs'
@@ -87,12 +87,12 @@
                 axios.get('api/featured/songs').then((response) => {
                     this.songs = response.data;
                 }).catch((error) => {
-                    // todo: create standard error responses to follow this pattern -mike 11/12/2017
+                    // todo: create standard error responses to follow this pattern -mike
                     //alert(`Error: ${error.response}`)
                 });
             },
             addToCart(sku_id) {
-                // todo: make ajax request to add song to cart by 'songs.sku.id' -mike 11/12/2017
+                // todo: make ajax request to add song to cart by 'songs.sku.id' -mike
             }
         },
         created() {
