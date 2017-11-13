@@ -12,6 +12,11 @@ class Album extends Model
         return $this->belongsTo(Artist::class);
     }
 
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
     // TODO: Add necessary pivot table and revisit this relation. -Ben
     /*
     public function genres()
