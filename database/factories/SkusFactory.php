@@ -19,7 +19,7 @@ $factory->define(Sku::class, function (Faker $faker) {
     $digital = $faker->boolean(95);
 
     return [
-        'price' => (int)(rand(0, 10).'.'.rand(0, 9).rand(0, 9)),
+        'price' => (float)(rand(0, 10).'.'.rand(0, 9).rand(0, 9)),
         'is_digital' => $faker->boolean(95),
         'is_taxable' => $faker->boolean(10),
         'requires_shipping' => !$digital,
