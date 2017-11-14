@@ -84,13 +84,13 @@ class SongsRepository implements SongsInterface
         return $this->db->table($table)->pluck('song_id')->toArray();
     }
 
-    public function isSongOrArtistInCooldown($song_id, $artist_id)
+    public function isArtistInCooldown($artist_id)
     {
         $table = 'featured_songs_cooldown';
-        $cooldowns = $this->db->table($table)->select('song_id', 'artist_id')->get();
+        $cooldowns = $this->db->table($table)->pluck('artist_id');
 
         foreach ($cooldowns as $cooldown) {
-            if($cooldown['song_id'] == $song_id || $cooldown['artist_id'] == $artist_id) {
+            if($cooldown['artist_id'] == $artist_id) {
                 return true;
             }
         }
@@ -131,7 +131,7 @@ class SongsRepository implements SongsInterface
         do {
             $random_id = rand(1, $song_count);
             $artist = $this->song->find($random_id)->album->artist;
-        } while ($this->isSongOrArtistInCooldown($random_id, $artist->id));
+        } while ($this->isArtistInCooldown($artist->id));
 
         $this->db->table($table)->insert([
             'song_id' => $random_id,
