@@ -17689,11 +17689,11 @@ window.Vue = __webpack_require__(38);
 Vue.component('home', __webpack_require__(41));
 
 var app = new Vue({
-    el: '#app',
+  el: '#app',
 
-    data: {
-        breadcrumbs: []
-    }
+  data: {
+    breadcrumbs: []
+  }
 });
 
 /***/ }),
@@ -65408,7 +65408,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\views\\Home.vue"
+Component.options.__file = "resources/views/Home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -65418,9 +65418,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-51f07652", Component.options)
+    hotAPI.createRecord("data-v-765745b8", Component.options)
   } else {
-    hotAPI.reload("data-v-51f07652", Component.options)
+    hotAPI.reload("data-v-765745b8", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65441,13 +65441,13 @@ var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(45)("e64be9f2", content, false);
+var update = __webpack_require__(45)("56409811", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-51f07652\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-51f07652\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-765745b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-765745b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -65884,7 +65884,7 @@ var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(51)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65901,7 +65901,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\components\\FeaturedSongs.vue"
+Component.options.__file = "resources/components/FeaturedSongs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -65911,9 +65911,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-41f6bf6f", Component.options)
+    hotAPI.createRecord("data-v-7146d54f", Component.options)
   } else {
-    hotAPI.reload("data-v-41f6bf6f", Component.options)
+    hotAPI.reload("data-v-7146d54f", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65953,7 +65953,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-__webpack_require__(52);
+__webpack_require__(51);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66040,72 +66040,7 @@ __webpack_require__(52);
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "featured-songs" } },
-    _vm._l(_vm.songs, function(song) {
-      return _c("ul", { staticClass: "featured-songs" }, [
-        _c("li", { staticClass: "play" }, [
-          _c("i", {
-            staticClass: "fa fa-play-circle-o audio-preview-play",
-            attrs: {
-              id: "audioPreview" + song.id,
-              "data-player-id": "audioPreview" + song.id
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "title" }, [
-          _vm._v(_vm._s(song.name) + " "),
-          _c("span", { staticClass: "play-time" }, [
-            _vm._v("(song.fileData.playTimeString)")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "price" }, [
-          _vm._v("$" + _vm._s(song.sku.price))
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "add" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-custom",
-              on: {
-                click: function($event) {
-                  _vm.addToCart(song.sku.id)
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fa fa-plus-square" }),
-              _vm._v(" Add to Cart\n            ")
-            ]
-          )
-        ])
-      ])
-    })
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-41f6bf6f", module.exports)
-  }
-}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(53);
+__webpack_require__(52);
 
 $(".audio-preview-play").on("click", function () {
 	var soundId = $(this).data('player-id');
@@ -66151,17 +66086,17 @@ function pauseAllPreviewPlayers() {
 }
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(54);
+__webpack_require__(53);
 
 $(function () {
 	$('[data-toggle="tooltip"]').tooltip();
 });
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
@@ -66185,6 +66120,71 @@ $(document).ready(function () {
 		height: '90%'
 	});
 });
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "featured-songs" } },
+    _vm._l(_vm.songs, function(song) {
+      return _c("ul", { staticClass: "featured-songs" }, [
+        _c("li", { staticClass: "play" }, [
+          _c("i", {
+            staticClass: "fa fa-play-circle-o audio-preview-play",
+            attrs: {
+              id: "audioPreview" + song.id,
+              "data-player-id": "audioPreview" + song.id
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "title" }, [
+          _vm._v(_vm._s(song.name) + " "),
+          _c("span", { staticClass: "play-time" }, [
+            _vm._v("(song.fileData.playTimeString)")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "price" }, [
+          _vm._v("$" + _vm._s(song.sku.price))
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "add" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-custom",
+              on: {
+                click: function($event) {
+                  _vm.addToCart(song.sku.id)
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-plus" }),
+              _vm._v(" Add to Cart\n            ")
+            ]
+          )
+        ])
+      ])
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7146d54f", module.exports)
+  }
+}
 
 /***/ }),
 /* 55 */
@@ -66273,7 +66273,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-51f07652", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-765745b8", module.exports)
   }
 }
 
