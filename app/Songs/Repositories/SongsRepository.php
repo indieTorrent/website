@@ -70,7 +70,7 @@ class SongsRepository implements SongsInterface
                 }
             }
         } else {
-            for ($i = 1; $i <= 6; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 $this->addRandomFeaturedSong();
             }
         }
