@@ -4,6 +4,7 @@ namespace App\Songs\Repositories;
 
 use App\Song;
 use App\Songs\Contracts\SongsInterface;
+use Illuminate\Support\Collection;
 
 class SongsRepository implements SongsInterface
 {
@@ -20,7 +21,7 @@ class SongsRepository implements SongsInterface
 
     /**
      * @param array $ids
-     * @return array
+     * @return Collection
      */
     public function getSongsByIds(array $ids)
     {
@@ -30,7 +31,7 @@ class SongsRepository implements SongsInterface
             array_push($songs, $this->getSongById($id));
         }
 
-        return $songs;
+        return collect($songs);
     }
 
     public function getSongById($id)
