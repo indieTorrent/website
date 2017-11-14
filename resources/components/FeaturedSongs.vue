@@ -9,9 +9,9 @@
                 </i>
             </li>
             <li class="title">{{song.name}} <span class="play-time">(song.fileData.playTimeString)</span></li>
-            <li class="price">$song.sku.price</li>
+            <li class="price">${{song.sku.price}}</li>
             <li class="add">
-                <button @click="addToCart(song.id)" class="btn btn-custom">
+                <button @click="addToCart(song.sku.id)" class="btn btn-custom">
                     <i class="fa fa-plus-square"></i> Add to Cart
                 </button>
             </li>
