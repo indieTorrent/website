@@ -6,4 +6,5 @@ interface SongsInterface
 {
     public function getSongsByIds(array $ids);
     public function getSongById($id);
+    public function getFeaturedSongIds();
 }

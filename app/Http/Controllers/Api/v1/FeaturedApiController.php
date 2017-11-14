@@ -21,12 +21,8 @@ class FeaturedApiController extends Controller
 
     public function songs()
     {
-        // todo: how can we make this more dynamic? -mike
-        $ids = [1, 5, 10, 20, 40, 80];
-
+        $ids = $this->songs->getFeaturedSongIds();
         $songs = $this->songs->getSongsByIds($ids);
-
-        // todo: add migration for table `unq_file_data_flac` -mike
         return response(SongResource::collection($songs), 200);
     }
 
