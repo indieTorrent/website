@@ -58,24 +58,30 @@ class SongsRepository implements SongsInterface
     {
         $table = 'featured_songs';
 
-        $featured = $this->db->table($table)->select('song_id as id', 'expires')->get();
+        $this->db->transaction(function () use ($table) {
 
-        if (count($featured) > 0) {
-            foreach ($featured as $song) {
-                if ($this->carbon->parse($song->expires) <= $this->carbon->now()) {
+            $featured = $this->db->table($table)->select('song_id as id', 'expires')->get();
 
-                    $this->removeFeaturedSong($song->id);
+            if (count($featured) > 0) {
+                foreach ($featured as $song) {
+                    if ($this->carbon->parse($song->expires) <= $this->carbon->now()) {
 
-                    $this->addRandomFeaturedSong();
+                        $this->removeFeaturedSong($song->id);
+
+                        $rank = $this->db->table($table)->count() + 1;
+
+                        $this->addRandomFeaturedSong($rank);
+                    }
+                }
+            } else {
+                for ($i = 1; $i <= 5; $i++) {
+                    $rank = $i;
+                    $this->addRandomFeaturedSong($rank);
                 }
             }
-        } else {
-            for ($i = 1; $i <= 5; $i++) {
-                $this->addRandomFeaturedSong();
-            }
-        }
+        });
 
-        return $this->db->table($table)->select('song_id')->pluck('song_id')->toArray();
+        return $this->db->table($table)->pluck('song_id')->toArray();
     }
 
     public function isSongOrArtistInCooldown($song_id, $artist_id)
@@ -95,11 +101,32 @@ class SongsRepository implements SongsInterface
     /**
      * @return integer
      */
-    public function addRandomFeaturedSong()
+    public function addRandomFeaturedSong($rank)
     {
         $table = 'featured_songs';
 
         $song_count = $this->song->count();
+
+        switch ($rank) {
+            case 1:
+                $expires = $this->carbon->now()->addWeek(4);
+                break;
+            case 2:
+                $expires = $this->carbon->now()->addWeek(3);
+                break;
+            case 3:
+                $expires = $this->carbon->now()->addWeek(2);
+                break;
+            case 4:
+                $expires = $this->carbon->now()->addWeek(1);
+                break;
+            case 5:
+                $expires = $this->carbon->now()->addDays(2);
+                break;
+            default:
+                $expires = $this->carbon->now()->addDays(2);
+                break;
+        }
 
         do {
             $random_id = rand(1, $song_count);
@@ -107,7 +134,8 @@ class SongsRepository implements SongsInterface
         } while ($this->isSongOrArtistInCooldown($random_id, $artist->id));
 
         $this->db->table($table)->insert([
-            'song_id' => $random_id
+            'song_id' => $random_id,
+            'expires' => $expires
         ]);
 
         return $random_id;
