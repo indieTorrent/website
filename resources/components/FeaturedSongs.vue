@@ -12,7 +12,7 @@
             <li class="price">${{song.sku.price}}</li>
             <li class="add">
                 <button @click="addToCart(song.sku.id)" class="btn btn-custom">
-                    <i class="fa fa-plus-square"></i> Add to Cart
+                    <i class="fa fa-plus"></i> Add to Cart
                 </button>
             </li>
         </ul>
