@@ -3,21 +3,20 @@
 namespace Tests\Unit;
 
 use App\Songs\Contracts\FeaturedSongsInterface;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class FeaturedSongsTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, DatabaseMigrations;
 
     protected $table = 'featured_songs';
 
     protected $cooldown_table = 'featured_songs_cooldown';
 
     protected $repo;
-
-    protected $db;
 
     public function setUp()
     {
