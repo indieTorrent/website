@@ -126,21 +126,36 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
             ->get();
 
         foreach ($cooldowns as $cooldown) {
-            if($cooldown->id == $artist_id) {
+            if($cooldown->artist_id == $artist_id) {
 
-                if ($this->carbon->parse($cooldown->expires) <= $this->carbon->now()) {
+                if($this->hasExpired($cooldown->expires)) {
                     // if the cooldown has expired, the artist can be featured again
                     // so lets remove them from the cooldown
-                    $this->removeArtistFromCooldown($cooldown->id);
+                    $this->removeArtistFromCooldown($cooldown->artist_id);
+
                     return false;
                 }
 
-                // the artist IS in cooldown
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Checks if expired
+     *
+     * @param $expires
+     * @return bool
+     */
+    public function hasExpired($expires)
+    {
+        if ($this->carbon->parse($expires) <= $this->carbon->now()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
