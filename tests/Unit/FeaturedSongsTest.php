@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Song;
 use App\Songs\Contracts\FeaturedSongsInterface;
+use App\Songs\Contracts\SongsInterface;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +29,7 @@ class FeaturedSongsTest extends TestCase
         $this->seed();
     }
 
-    public function test_can_add_artist_to_cooldown()
+    public function test_add_artist_to_cooldown()
     {
         $this->repo->addArtistToCooldown(1);
 
@@ -36,15 +38,35 @@ class FeaturedSongsTest extends TestCase
             ->first()
             ->artist_id;
 
-        $this->assertTrue(($result == 1), 'Artist was NOT added to cooldown');
+        $this->assertTrue(($result == 1), 'addArtistToCooldown');
     }
 
-    public function test_artist_in_cooldown()
+    public function test_returns_array_of_all_song_ids_in_featured_songs_table()
+    {
+        $array = $this->repo->getSongIds();
+
+        $key = DB::table($this->table)
+            ->first()
+            ->song_id;
+
+        $this->assertTrue(is_array($array), 'getSongIds');
+        $this->assertTrue(in_array($key, $array), 'getSongIds');
+    }
+
+    public function test_returns_collection_of_song_objects()
+    {
+        $expected = Song::class; // todo: want a way to check this using the Interface -mike
+        $actual = $this->repo->getSongs($this->repo->getSongIds());
+
+        $this->assertInstanceOf($expected, $actual[0], 'getSongs');
+    }
+
+    public function test_is_artist_in_cooldown()
     {
         $this->repo->addArtistToCooldown(1);
 
         $result = $this->repo->isArtistInCooldown(1);
-        $this->assertTrue($result, 'Artist is NOT in cooldown');
+        $this->assertTrue($result, 'isArtistInCooldown');
     }
 
 }
