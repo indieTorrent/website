@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArtistsTable extends Migration
+class CreateMusicEntitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateArtistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('artists', function (Blueprint $table) {
+        Schema::create('music_entities', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('musicable_id');
+            $table->string('musicable_type');
             $table->string('moniker');
             $table->string('alt_moniker')->nullable();
             $table->string('city')->nullable();
