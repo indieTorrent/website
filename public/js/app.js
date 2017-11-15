@@ -17689,11 +17689,11 @@ window.Vue = __webpack_require__(38);
 Vue.component('home', __webpack_require__(41));
 
 var app = new Vue({
-  el: '#app',
+    el: '#app',
 
-  data: {
-    breadcrumbs: []
-  }
+    data: {
+        breadcrumbs: []
+    }
 });
 
 /***/ }),
@@ -65408,7 +65408,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/views/Home.vue"
+Component.options.__file = "resources\\views\\Home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -65418,9 +65418,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-765745b8", Component.options)
+    hotAPI.createRecord("data-v-51f07652", Component.options)
   } else {
-    hotAPI.reload("data-v-765745b8", Component.options)
+    hotAPI.reload("data-v-51f07652", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65441,13 +65441,13 @@ var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(45)("56409811", content, false);
+var update = __webpack_require__(45)("e64be9f2", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-765745b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-765745b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue");
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-51f07652\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-51f07652\",\"scoped\":false,\"hasInlineConfig\":true}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Home.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -65901,7 +65901,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/components/FeaturedSongs.vue"
+Component.options.__file = "resources\\components\\FeaturedSongs.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -65911,9 +65911,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7146d54f", Component.options)
+    hotAPI.createRecord("data-v-41f6bf6f", Component.options)
   } else {
-    hotAPI.reload("data-v-7146d54f", Component.options)
+    hotAPI.reload("data-v-41f6bf6f", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66182,7 +66182,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7146d54f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-41f6bf6f", module.exports)
   }
 }
 
@@ -66273,7 +66273,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-765745b8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-51f07652", module.exports)
   }
 }
 
