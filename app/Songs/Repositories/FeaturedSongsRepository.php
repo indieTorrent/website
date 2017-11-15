@@ -87,11 +87,11 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
                         $artist_id = $this->song->getArtistBySongId($song->id)->id;
                         $this->addArtistToCooldown($artist_id);
 
+                        // lets get the rank for the new featured song
+                        $rank = $this->getRank($song->id);
+
                         // then remove it from the featured table
                         $this->removeSong($song->id);
-
-                        // lets get the rank for the new featured song
-                        $rank = $this->db->table($this->table)->count() + 1;
 
                         // and add a new random song taking the expired songs rank!
                         $this->addRandomSong($rank);
@@ -111,6 +111,25 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
 
         // and finally, lets return all the updated featured song id's
         return $this->db->table($this->table)->pluck('song_id')->toArray();
+    }
+
+    /**
+     * Determines the rank (placement) for the new song
+     *
+     * @param $song_id
+     * @return int|mixed|string
+     */
+    public function getRank($song_id)
+    {
+        $ids = $this->db->table($this->table)->pluck('id');
+
+        foreach($ids as $index => $id) {
+            if($id == $song_id) {
+                return $index;
+            }
+        }
+
+        return $ids->count();
     }
 
     /**
@@ -166,8 +185,6 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
      */
     public function addRandomSong($rank = 1)
     {
-        $song_count = $this->song->count();
-
         switch ($rank) {
             case 1:
                 $expires = $this->carbon->now()->addWeek(4);
@@ -193,21 +210,27 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
         // cooldown table has artist_id
         // releationship is song->album->artist
 
-        $random_id = $this->song->instance()
-            ->whereDoesntHave('album', function ($q) {
-                $q->whereNotIn('artist_id', $this->getCooldownArtistIds());
+        $random_id = $this->db->table('songs')
+            ->select('songs.id')
+            ->whereIn('songs.id', function($q) {
+                $q->select('songs.id')->from('songs')
+                    ->join('albums', function($j) {
+                        $j->on('songs.album_id', '=', 'albums.id');
+                    })
+                    ->join('artists', function($j) {
+                        $j->on('albums.artist_id', '=', 'artists.id');
+                    })
+                    ->whereNotIn('artists.id', $this->getCooldownArtistIds());
             })
             ->inRandomOrder()
-            ->firstOrFail()
-            ->id;
+            ->first()->id;
 
-        // then we will add that song
         $this->db->table($this->table)->insert([
             'song_id' => $random_id,
             'expires' => $expires
         ]);
 
-        return (string)$random_id;
+        return $random_id;
     }
 
     /**
