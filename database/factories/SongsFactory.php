@@ -24,7 +24,9 @@ $factory->define(Song::class, function (Faker $faker) {
         'name' => $faker->company,
         'alt_name' => $faker->company,
         'album_id' => $album_id,
-        'song_order' => songOrder($album_id),
+        'song_order' => function() use ($album_id) {
+            return Song::where('album_id', $album_id)->count() + 1;
+        },
         'sku_id' => function() {
             return factory(Sku::class)->create()->id;
         },
@@ -33,9 +35,3 @@ $factory->define(Song::class, function (Faker $faker) {
         'is_in_back_catalog' => $faker->boolean(15),
     ];
 });
-
-function songOrder($album_id)
-{
-    $count = Song::where('album_id', $album_id)->count();
-    return $count + 1;
-}

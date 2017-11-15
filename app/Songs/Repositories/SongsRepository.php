@@ -17,27 +17,15 @@ class SongsRepository implements SongsInterface
     private $song;
 
     /**
-     * @var DatabaseManager
-     */
-    private $db;
-
-    /**
-     * @var Carbon
-     */
-    private $carbon;
-
-    /**
      * SongsRepository constructor.
      *
      * @param Song $song
      * @param DatabaseManager $db
      * @param Carbon $carbon
      */
-    public function __construct(Song $song, DatabaseManager $db, Carbon $carbon)
+    public function __construct(Song $song)
     {
         $this->song = $song;
-        $this->db = $db;
-        $this->carbon = $carbon;
     }
 
     /**

@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use App\Songs\Contracts\FeaturedSongsInterface;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FeaturedSongsTest extends TestCase
 {
@@ -14,8 +14,6 @@ class FeaturedSongsTest extends TestCase
     protected $table = 'featured_songs';
 
     protected $cooldown_table = 'featured_songs_cooldown';
-
-    protected $db_connection = 'sqlite';
 
     protected $repo;
 
@@ -26,20 +24,15 @@ class FeaturedSongsTest extends TestCase
         parent::setUp();
 
         $this->repo = $this->app->make(FeaturedSongsInterface::class);
-        $this->db = DB::connection($this->db_connection);
 
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
+        $this->seed();
     }
 
     public function test_can_add_artist_to_cooldown()
     {
         $this->repo->addArtistToCooldown(1);
 
-        $result = $this->db->table($this->cooldown_table)
+        $result = DB::table($this->cooldown_table)
             ->where('artist_id', 1)
             ->first()
             ->artist_id;
