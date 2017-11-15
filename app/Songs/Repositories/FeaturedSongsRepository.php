@@ -170,11 +170,7 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
      */
     public function hasExpired($expires)
     {
-        if ($this->carbon->parse($expires) <= $this->carbon->now()) {
-            return false;
-        }
-
-        return true;
+        return ($this->carbon->parse($expires) <= $this->carbon->now());
     }
 
     /**
