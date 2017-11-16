@@ -15,6 +15,12 @@ class CreateEntityApprovalsTable extends Migration
     {
         Schema::create('entity_approvals', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('entity_id');
+            $table->foreign('entity_id')->references('id')->on('music_entities');
+            #$table->unsignedInteger('entity_type_id');
+            #$table->foreign('entity_type_id')->references('id')->on('entity_types');
+            $table->unsignedInteger('approver_id');
+            $table->foreign('approver_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateEntityApprovalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('label_approvals');
+        Schema::dropIfExists('entity_approvals');
     }
 }

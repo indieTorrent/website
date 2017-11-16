@@ -16,9 +16,9 @@ class CreateLabelArtistsTable extends Migration
         Schema::create('label_artists', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('artist_id');
-            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->foreign('artist_id')->references('id')->on('music_entities');
             $table->unsignedInteger('label_id');
-            $table->foreign('label_id')->references('id')->on('labels');
+            $table->foreign('label_id')->references('id')->on('music_entities');
             $table->timestamps();
         });
     }

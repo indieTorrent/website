@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEntityProfileTable extends Migration
+class CreateMusicEntityProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEntityProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('entity_profile', function (Blueprint $table) {
+        Schema::create('music_entity_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('artist_id');
-            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->unsignedInteger('entity_id');
+            $table->foreign('entity_id')->references('id')->on('music_entities');
             $table->string('tagline')->nullable();
             $table->text('band_members')->nullable();
             $table->text('influences')->nullable();
@@ -35,6 +35,6 @@ class CreateEntityProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artist_profile');
+        Schema::dropIfExists('music_entity_profiles');
     }
 }

@@ -15,8 +15,8 @@ class CreateMusicEntitiesTable extends Migration
     {
         Schema::create('music_entities', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('musicable_id');
-            $table->string('musicable_type');
+            #$table->unsignedInteger('musicable_id');
+            #$table->string('musicable_type');
             $table->string('moniker');
             $table->string('alt_moniker')->nullable();
             $table->string('city')->nullable();
@@ -48,6 +48,6 @@ class CreateMusicEntitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artists');
+        Schema::dropIfExists('music_entities');
     }
 }

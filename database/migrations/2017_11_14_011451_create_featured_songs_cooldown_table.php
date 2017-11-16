@@ -16,8 +16,8 @@ class CreateFeaturedSongsCooldownTable extends Migration
     {
         Schema::create('featured_songs_cooldown', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('artist_id');
-            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->unsignedInteger('entity_id');
+            $table->foreign('entity_id')->references('id')->on('music_entities');
             $table->string('expires')->default(Carbon::now()->addMonth(6));
         });
     }
