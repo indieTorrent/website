@@ -2,12 +2,13 @@
 
 namespace App\Songs\Repositories;
 
+use App\Repositories\BaseRepository;
 use App\Songs\Contracts\FeaturedSongsInterface;
 use App\Songs\Contracts\SongsInterface;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 
-class FeaturedSongsRepository implements FeaturedSongsInterface
+class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInterface
 {
     /**
      * The Featured Songs Table

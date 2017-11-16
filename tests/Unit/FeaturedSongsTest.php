@@ -20,18 +20,30 @@ use Tests\TestCase;
  */
 class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
 {
+    /*
+     * All Tests that interact with the DB should use these traits
+     */
     use RefreshDatabase, DatabaseMigrations;
 
-    protected $table = 'featured_songs';
+    protected $table;
 
-    protected $cooldown_table = 'featured_songs_cooldown';
+    protected $cooldown_table;
 
     protected $repo;
 
     public function setUp()
     {
+        /*
+         * Do not change
+         */
         parent::setUp();
 
+        /*
+         * Should always get the Interface instance from the container
+         *
+         * Note: this is why it is so important to "Code To An Interface"
+         * -mike
+         */
         $this->repo = $this->app->make(FeaturedSongsInterface::class);
 
         /*
@@ -41,11 +53,21 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
          * -mike
          */
         $this->seed('TestsDatabaseSeeder');
+
+        /*
+         * FYI: you can get any property from the repo as long as the repository
+         * extends App\Repositories\BaseRepository
+         */
+        $this->table = $this->repo->getProperty('table');
+        $this->cooldown_table = $this->repo->getProperty('cooldown_table');
     }
 
     /*
      * STARTS TESTS
+     *
+     * Take note to the method naming convention test_theMethodThatsBeingTested()
      */
+
     public function test_addArtistToCooldown()
     {
         $this->addArtistToCooldown(1);
