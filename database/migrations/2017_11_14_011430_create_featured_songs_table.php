@@ -18,6 +18,7 @@ class CreateFeaturedSongsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('song_id');
             $table->foreign('song_id')->references('id')->on('songs');
+            $table->integer('rank');
             $table->string('expires')->default(Carbon::now()->addWeek(1));
         });
     }

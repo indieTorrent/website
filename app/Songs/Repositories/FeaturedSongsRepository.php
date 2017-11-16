@@ -88,13 +88,14 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
                         $entity_id = $this->songs->getArtistBySongId($song->id)->id;
                         $this->addArtistToCooldown($entity_id);
 
-                        // lets get the rank for the new featured song
+                        // we get the rank of the expired song so
+                        // that we can assign it to the new song
                         $rank = $this->getRank($song->id);
 
                         // then remove it from the featured table
                         $this->removeSong($song->id);
 
-                        // and add a new random song taking the expired songs rank!
+                        // and add a new random song with the expired songs rank!
                         $this->addRandomSong($rank);
                     }
                 }
@@ -111,7 +112,10 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
         });
 
         // and finally, lets return all the updated featured song id's
-        return $this->db->table($this->table)->pluck('song_id')->toArray();
+        return $this->db->table($this->table)
+            ->pluck('song_id')
+            ->sortBy('rank')
+            ->toArray();
     }
 
     /**
@@ -122,15 +126,10 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
      */
     public function getRank($song_id)
     {
-        $ids = $this->db->table($this->table)->pluck('id');
-
-        foreach($ids as $index => $id) {
-            if($id == $song_id) {
-                return $index+1;
-            }
-        }
-
-        return $ids->count();
+        return $this->db->table($this->table)
+            ->where('song_id', $song_id)
+            ->first()
+            ->rank;
     }
 
     /**
@@ -180,7 +179,7 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
      * @param int $rank
      * @return string
      */
-    public function addRandomSong($rank = 1)
+    public function addRandomSong($rank)
     {
         switch ($rank) {
             case 1:
@@ -224,6 +223,7 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
 
         $this->db->table($this->table)->insert([
             'song_id' => $random_id,
+            'rank' => $rank,
             'expires' => $expires
         ]);
 
