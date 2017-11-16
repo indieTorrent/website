@@ -10,7 +10,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class FeaturedSongsTest extends TestCase
+/*
+ * We should always follow a contract for unit tests.
+ * This will insure that we test every unit in the repository
+ * thats being tested.
+ *
+ * Note the naming convention I chosen for the test_methods.
+ * -mike
+ */
+class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
 {
     use RefreshDatabase, DatabaseMigrations;
 
@@ -26,12 +34,21 @@ class FeaturedSongsTest extends TestCase
 
         $this->repo = $this->app->make(FeaturedSongsInterface::class);
 
-        $this->seed();
+        /*
+         * We use this Database Seeder when testing DB interactions.
+         * It seeds a much smaller amount of data just enough for testing purposes.
+         * This reduces testing times.
+         * -mike
+         */
+        $this->seed('TestsDatabaseSeeder');
     }
 
-    public function test_add_artist_to_cooldown()
+    /*
+     * STARTS TESTS
+     */
+    public function test_addArtistToCooldown()
     {
-        $this->repo->addArtistToCooldown(1);
+        $this->addArtistToCooldown(1);
 
         $result = DB::table($this->cooldown_table)
             ->where('artist_id', 1)
@@ -41,9 +58,9 @@ class FeaturedSongsTest extends TestCase
         $this->assertTrue(($result == 1), 'addArtistToCooldown');
     }
 
-    public function test_returns_array_of_all_song_ids_in_featured_songs_table()
+    public function test_getSongIds()
     {
-        $array = $this->repo->getSongIds();
+        $array = $this->getSongIds();
 
         $key = DB::table($this->table)
             ->first()
@@ -53,20 +70,58 @@ class FeaturedSongsTest extends TestCase
         $this->assertTrue(in_array($key, $array), 'getSongIds');
     }
 
-    public function test_returns_collection_of_song_objects()
+    public function test_isArtistInCooldown()
     {
-        $expected = Song::class; // todo: want a way to check this using the Interface -mike
-        $actual = $this->repo->getSongs($this->repo->getSongIds());
+        $this->addArtistToCooldown(1);
 
-        $this->assertInstanceOf($expected, $actual[0], 'getSongs');
-    }
-
-    public function test_is_artist_in_cooldown()
-    {
-        $this->repo->addArtistToCooldown(1);
-
-        $result = $this->repo->isArtistInCooldown(1);
+        $result = $this->isArtistInCooldown(1);
         $this->assertTrue($result, 'isArtistInCooldown');
     }
 
+    /*
+     * ENDS TESTS
+     */
+
+    /*
+     * METHOD WRAPPERS FOLLOWING CONTRACT (INSURES WE TEST EVERY UNIT)
+     */
+    public function getSongs()
+    {
+        return $this->repo->getSongs();
+    }
+
+    public function getSongIds()
+    {
+        return $this->repo->getSongIds();
+    }
+
+    public function getCooldownArtistIds()
+    {
+        return $this->repo->getCooldownArtistIds();
+    }
+
+    public function isArtistInCooldown($artist_id)
+    {
+        return $this->repo->isArtistInCooldown($artist_id);
+    }
+
+    public function addArtistToCooldown($artist_id)
+    {
+        return $this->repo->addArtistToCooldown($artist_id);
+    }
+
+    public function removeArtistFromCooldown($artist_id)
+    {
+        return $this->repo->removeArtistFromCooldown($artist_id);
+    }
+
+    public function addRandomSong($rank = 1)
+    {
+        $this->repo->addRandomSong($rank = 1);
+    }
+
+    public function removeSong($song_id)
+    {
+        return $this->repo->removeSong($song_id);
+    }
 }
