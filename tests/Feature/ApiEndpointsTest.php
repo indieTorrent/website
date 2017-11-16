@@ -20,7 +20,7 @@ class ApiEndpointsTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed();
+        $this->seed('TestsDatabaseSeeder');
     }
 
     public function test_featured_songs()
