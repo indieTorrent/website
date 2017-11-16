@@ -27,7 +27,7 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
     /**
      * @var SongsInterface
      */
-    private $song;
+    private $songs;
 
     /**
      * @var DatabaseManager
@@ -42,13 +42,13 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
     /**
      * FeaturedSongsRepository constructor.
      *
-     * @param SongsInterface $song
+     * @param SongsInterface $songs
      * @param DatabaseManager $db
      * @param Carbon $carbon
      */
-    public function __construct(SongsInterface $song, DatabaseManager $db, Carbon $carbon)
+    public function __construct(SongsInterface $songs, DatabaseManager $db, Carbon $carbon)
     {
-        $this->song = $song;
+        $this->songs = $songs;
         $this->db = $db;
         $this->carbon = $carbon;
     }
@@ -60,7 +60,7 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
      */
     public function getSongs()
     {
-        return $this->song->getSongsByIds($this->getSongIds());
+        return $this->songs->getSongsByIds($this->getSongIds());
     }
 
     /**
@@ -85,7 +85,7 @@ class FeaturedSongsRepository extends BaseRepository implements FeaturedSongsInt
                     if ($this->hasExpired($song->expires)) {
 
                         // lets add the artist to the cooldown
-                        $entity_id = $this->song->getArtistBySongId($song->id)->id;
+                        $entity_id = $this->songs->getArtistBySongId($song->id)->id;
                         $this->addArtistToCooldown($entity_id);
 
                         // lets get the rank for the new featured song
