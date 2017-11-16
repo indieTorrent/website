@@ -81,17 +81,17 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
                 // If we have songs already being featured
                 foreach ($featured as $song) {
                     // lets check to see if they have expired
-                    if ($this->carbon->parse($song->expires) <= $this->carbon->now()) {
+                    if ($this->hasExpired($song->expires)) {
 
                         // lets add the artist to the cooldown
                         $artist_id = $this->song->getArtistBySongId($song->id)->id;
                         $this->addArtistToCooldown($artist_id);
 
+                        // lets get the rank for the new featured song
+                        $rank = $this->getRank($song->id);
+
                         // then remove it from the featured table
                         $this->removeSong($song->id);
-
-                        // lets get the rank for the new featured song
-                        $rank = $this->db->table($this->table)->count() + 1;
 
                         // and add a new random song taking the expired songs rank!
                         $this->addRandomSong($rank);
@@ -109,8 +109,27 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
             }
         });
 
-        // and finally, lets return all the update featured song id's
+        // and finally, lets return all the updated featured song id's
         return $this->db->table($this->table)->pluck('song_id')->toArray();
+    }
+
+    /**
+     * Determines the rank (placement) for the new song
+     *
+     * @param $song_id
+     * @return int|mixed|string
+     */
+    public function getRank($song_id)
+    {
+        $ids = $this->db->table($this->table)->pluck('id');
+
+        foreach($ids as $index => $id) {
+            if($id == $song_id) {
+                return $index;
+            }
+        }
+
+        return $ids->count();
     }
 
     /**
@@ -151,11 +170,7 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
      */
     public function hasExpired($expires)
     {
-        if ($this->carbon->parse($expires) <= $this->carbon->now()) {
-            return false;
-        }
-
-        return true;
+        return ($this->carbon->parse($expires) <= $this->carbon->now());
     }
 
     /**
@@ -166,8 +181,6 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
      */
     public function addRandomSong($rank = 1)
     {
-        $song_count = $this->song->count();
-
         switch ($rank) {
             case 1:
                 $expires = $this->carbon->now()->addWeek(4);
@@ -189,20 +202,31 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
                 break;
         }
 
-        // Lets get a random song by an artist thats NOT in cooldown
-        $random_id = $this->song->instance()
-            ->whereNotIn('artist_id', $this->getCooldownArtistIds())
-            ->inRandomOrder()
-            ->first()
-            ->id;
+        // Need to get a random song by an artist thats NOT in cooldown
+        // cooldown table has artist_id
+        // releationship is song->album->artist
 
-        // then we will add that song
+        $random_id = $this->db->table('songs')
+            ->select('songs.id')
+            ->whereIn('songs.id', function($q) {
+                $q->select('songs.id')->from('songs')
+                    ->join('albums', function($j) {
+                        $j->on('songs.album_id', '=', 'albums.id');
+                    })
+                    ->join('artists', function($j) {
+                        $j->on('albums.artist_id', '=', 'artists.id');
+                    })
+                    ->whereNotIn('artists.id', $this->getCooldownArtistIds());
+            })
+            ->inRandomOrder()
+            ->first()->id;
+
         $this->db->table($this->table)->insert([
             'song_id' => $random_id,
             'expires' => $expires
         ]);
 
-        return (string)$random_id;
+        return $random_id;
     }
 
     /**

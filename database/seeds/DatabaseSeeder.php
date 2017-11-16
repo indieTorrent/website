@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         /*
          * Lets build up some Artists with albums and songs!!
          */
-        $this->log("<info>Seeding:</info> 100 Artists");
-        $artists = factory(Artist::class, 100)->create();
+        $this->log("<info>Seeding:</info> 50 Artists");
+        $artists = factory(Artist::class, 50)->create();
 
         foreach ($artists as $artist) {
             $num = rand(1, 5);
