@@ -1,7 +1,7 @@
 <?php
 
 use App\Album;
-use App\Artist;
+use App\MusicEntity;
 use App\Song;
 use Illuminate\Database\Seeder;
 
@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
          * Lets build up some Artists with albums and songs!!
          */
         $this->log("<info>Seeding:</info> 50 Artists");
-        $artists = factory(Artist::class, 50)->create();
+        $entities = factory(MusicEntity::class, 50)->create();
 
-        foreach ($artists as $artist) {
+        foreach ($entities as $entity) {
             $num = rand(1, 5);
-            $this->log("<info>Seeding:</info> ".$num." Albums for Artist ID ".$artist->id);
+            $this->log("<info>Seeding:</info> ".$num." Albums for Music Entity ID ".$entity->id);
             $albums = factory(Album::class, $num)->create([
-                'artist_id' => $artist->id
+                'entity_id' => $entity->id
             ]);
 
             foreach($albums as $album) {

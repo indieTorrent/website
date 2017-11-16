@@ -15,8 +15,8 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('artist_id');
-            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->unsignedInteger('entity_id');
+            $table->foreign('entity_id')->references('id')->on('music_entities');
             $table->string('title');
             $table->string('alt_title')->nullable();
             $table->enum('type', ['f', 't']);

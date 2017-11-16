@@ -1,11 +1,10 @@
 <?php
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeaturedSongsCooldownTable extends Migration
+class CreateEntityApprovalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,15 @@ class CreateFeaturedSongsCooldownTable extends Migration
      */
     public function up()
     {
-        Schema::create('featured_songs_cooldown', function (Blueprint $table) {
+        Schema::create('entity_approvals', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('entity_id');
             $table->foreign('entity_id')->references('id')->on('music_entities');
-            $table->string('expires')->default(Carbon::now()->addMonth(6));
+            #$table->unsignedInteger('entity_type_id');
+            #$table->foreign('entity_type_id')->references('id')->on('entity_types');
+            $table->unsignedInteger('approver_id');
+            $table->foreign('approver_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +32,6 @@ class CreateFeaturedSongsCooldownTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('featured_songs_cooldown');
+        Schema::dropIfExists('entity_approvals');
     }
 }
