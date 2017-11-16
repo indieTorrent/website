@@ -1,7 +1,7 @@
 <?php
 
 use App\Album;
-use App\Artist;
+use App\MusicEntity;
 use App\Genre;
 use Faker\Generator as Faker;
 
@@ -18,10 +18,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Album::class, function (Faker $faker) {
 
-    $artist_id = $faker->numberBetween(1, Artist::count());
+    $entity_id = $faker->numberBetween(1, MusicEntity::count());
 
     return [
-        'artist_id' => $artist_id,
+        'entity_id' => $entity_id,
         'title' => $faker->company,
         'alt_title' => $faker->company,
         'type' => 'f', // todo: not sure what to do with this -mike

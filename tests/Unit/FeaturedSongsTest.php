@@ -34,9 +34,9 @@ class FeaturedSongsTest extends TestCase
         $this->repo->addArtistToCooldown(1);
 
         $result = DB::table($this->cooldown_table)
-            ->where('artist_id', 1)
+            ->where('entity_id', 1)
             ->first()
-            ->artist_id;
+            ->entity_id;
 
         $this->assertTrue(($result == 1), 'addArtistToCooldown');
     }

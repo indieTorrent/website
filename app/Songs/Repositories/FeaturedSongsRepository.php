@@ -84,8 +84,8 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
                     if ($this->hasExpired($song->expires)) {
 
                         // lets add the artist to the cooldown
-                        $artist_id = $this->song->getArtistBySongId($song->id)->id;
-                        $this->addArtistToCooldown($artist_id);
+                        $entity_id = $this->song->getArtistBySongId($song->id)->id;
+                        $this->addArtistToCooldown($entity_id);
 
                         // lets get the rank for the new featured song
                         $rank = $this->getRank($song->id);
@@ -135,22 +135,22 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
     /**
      * Checks if the artist is currently in cooldown
      *
-     * @param $artist_id
+     * @param $entity_id
      * @return bool
      */
-    public function isArtistInCooldown($artist_id)
+    public function isArtistInCooldown($entity_id)
     {
         $cooldowns = $this->db->table($this->cooldown_table)
-            ->select('artist_id', 'expires')
+            ->select('entity_id', 'expires')
             ->get();
 
         foreach ($cooldowns as $cooldown) {
-            if($cooldown->artist_id == $artist_id) {
+            if($cooldown->entity_id == $entity_id) {
 
                 if($this->hasExpired($cooldown->expires)) {
                     // if the cooldown has expired, the artist can be featured again
                     // so lets remove them from the cooldown
-                    $this->removeArtistFromCooldown($cooldown->artist_id);
+                    $this->removeArtistFromCooldown($cooldown->entity_id);
 
                     return false;
                 }
@@ -203,7 +203,7 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
         }
 
         // Need to get a random song by an artist thats NOT in cooldown
-        // cooldown table has artist_id
+        // cooldown table has entity_id
         // releationship is song->album->artist
 
         $random_id = $this->db->table('songs')
@@ -213,10 +213,10 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
                     ->join('albums', function($j) {
                         $j->on('songs.album_id', '=', 'albums.id');
                     })
-                    ->join('artists', function($j) {
-                        $j->on('albums.artist_id', '=', 'artists.id');
+                    ->join('music_entities', function($j) {
+                        $j->on('albums.entity_id', '=', 'music_entities.id');
                     })
-                    ->whereNotIn('artists.id', $this->getCooldownArtistIds());
+                    ->whereNotIn('music_entities.id', $this->getCooldownArtistIds());
             })
             ->inRandomOrder()
             ->first()->id;
@@ -248,20 +248,20 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
     public function getCooldownArtistIds()
     {
         return $this->db->table($this->cooldown_table)
-            ->pluck('artist_id');
+            ->pluck('entity_id');
     }
 
     /**
      * Adds a artist to the featured songs cooldown table by its id
      *
-     * @param $artist_id
+     * @param $entity_id
      * @return void
      */
-    public function addArtistToCooldown($artist_id)
+    public function addArtistToCooldown($entity_id)
     {
-        if(!$this->isArtistInCooldown($artist_id)) {
+        if(!$this->isArtistInCooldown($entity_id)) {
             $this->db->table($this->cooldown_table)->insert([
-                'artist_id' => $artist_id
+                'entity_id' => $entity_id
             ]);
         }
     }
@@ -269,11 +269,11 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
     /**
      * Removes an artist from the featured songs cooldown table
      *
-     * @param $artist_id
+     * @param $entity_id
      */
-    public function removeArtistFromCooldown($artist_id)
+    public function removeArtistFromCooldown($entity_id)
     {
-        $this->db->table($this->cooldown_table)->where('artist_id', $artist_id)->delete();
+        $this->db->table($this->cooldown_table)->where('entity_id', $entity_id)->delete();
     }
 
 

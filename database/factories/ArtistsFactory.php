@@ -1,6 +1,6 @@
 <?php
 
-use App\Artist;
+use App\MusicEntity;
 use App\Country;
 use App\User;
 use Faker\Generator as Faker;
@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Artist::class, function (Faker $faker) {
+$factory->define(MusicEntity::class, function (Faker $faker) {
 
     $faker->addProvider(new \Faker\Provider\en_US\Address($faker));
 
