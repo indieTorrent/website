@@ -125,7 +125,7 @@ class FeaturedSongsRepository implements FeaturedSongsInterface
 
         foreach($ids as $index => $id) {
             if($id == $song_id) {
-                return $index;
+                return $index+1;
             }
         }
 
