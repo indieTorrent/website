@@ -7,6 +7,7 @@ use App\Songs\Contracts\FeaturedSongsInterface;
 use App\Songs\Contracts\SongsInterface;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
@@ -68,16 +69,13 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
      * Take note to the method naming convention test_theMethodThatsBeingTested()
      */
 
-    public function test_addArtistToCooldown()
+    public function test_getSongs()
     {
-        $this->addArtistToCooldown(1);
+        $collection = $this->getSongs();
+        $song = $this->app->make(SongsInterface::class)->instance();
 
-        $result = DB::table($this->cooldown_table)
-            ->where('entity_id', 1)
-            ->first()
-            ->entity_id;
-
-        $this->assertTrue(($result == 1), 'addArtistToCooldown');
+        $this->assertInstanceOfCollection($collection);
+        $this->assertInstanceOf(get_class($song), $collection->first());
     }
 
     public function test_getSongIds()
@@ -90,6 +88,30 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
 
         $this->assertTrue(is_array($array), 'getSongIds');
         $this->assertTrue(in_array($key, $array), 'getSongIds');
+    }
+
+    public function test_getCooldownArtistIds()
+    {
+        $a = [1,2,3,4,5];
+        foreach($a as $b) {$this->addArtistToCooldown($b);}
+
+        $collection = $this->getCooldownArtistIds();
+
+        $this->assertInstanceOfCollection($collection);
+        $this->assertTrue(($collection->count() === 5));
+        $this->assertTrue(is_int($collection->first()));
+    }
+
+    public function test_addArtistToCooldown()
+    {
+        $this->addArtistToCooldown(1);
+
+        $result = DB::table($this->cooldown_table)
+            ->where('entity_id', 1)
+            ->first()
+            ->entity_id;
+
+        $this->assertTrue(($result == 1), 'addArtistToCooldown');
     }
 
     public function test_isArtistInCooldown()
@@ -107,6 +129,8 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
     /*
      * METHOD WRAPPERS FOLLOWING CONTRACT (INSURES WE TEST EVERY UNIT)
      */
+
+
     public function getSongs()
     {
         return $this->repo->getSongs();
@@ -145,5 +169,15 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
     public function removeSong($song_id)
     {
         return $this->repo->removeSong($song_id);
+    }
+
+    public function getRank($song_id)
+    {
+        $this->repo->getRank($song_id);
+    }
+
+    public function hasExpired($expires)
+    {
+        $this->repo->hasExpired($expires);
     }
 }
