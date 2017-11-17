@@ -122,6 +122,54 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
         $this->assertTrue($result, 'isArtistInCooldown');
     }
 
+    public function test_removeArtistFromCooldown()
+    {
+        $this->addArtistToCooldown(5);
+        $this->removeArtistFromCooldown(5);
+
+        $get = DB::table($this->cooldown_table)->where('entity_id', 5)->get();
+
+        $this->assertCount(0, $get);
+    }
+
+    public function test_addRandomSong()
+    {
+        $rid = $this->addRandomSong(1);
+
+        $this->assertTrue(is_int($rid));
+
+        $countable = DB::table($this->table)->where('song_id', $rid)->get();
+
+        $this->assertCount(1, $countable);
+    }
+
+    public function test_removeSong()
+    {
+        $rid = $this->addRandomSong(1);
+        $this->removeSong($rid);
+
+        $countable = DB::table($this->table)->where('song_id', $rid)->get();
+
+        $this->assertCount(0, $countable);
+    }
+
+    public function test_getRank()
+    {
+        $ranks = [1,2,3,4,5];
+
+        $rid = $this->addRandomSong(1);
+        $rank = $this->getRank($rid);
+
+        $this->assertArrayHasKey($rank, $ranks);
+    }
+
+    public function test_hasExpired()
+    {
+        $expired = $this->hasExpired(\Carbon\Carbon::now()->subDays(5));
+
+        $this->assertTrue($expired);
+    }
+
     /*
      * ENDS TESTS
      */
@@ -131,53 +179,53 @@ class FeaturedSongsTest extends TestCase implements FeaturedSongsInterface
      */
 
 
-    public function getSongs()
+    public function getSongs(): collection
     {
         return $this->repo->getSongs();
     }
 
-    public function getSongIds()
+    public function getSongIds(): array
     {
         return $this->repo->getSongIds();
     }
 
-    public function getCooldownArtistIds()
+    public function getCooldownArtistIds(): collection
     {
         return $this->repo->getCooldownArtistIds();
     }
 
-    public function isArtistInCooldown($artist_id)
+    public function isArtistInCooldown($artist_id): bool
     {
         return $this->repo->isArtistInCooldown($artist_id);
     }
 
-    public function addArtistToCooldown($artist_id)
+    public function addArtistToCooldown($artist_id): void
     {
-        return $this->repo->addArtistToCooldown($artist_id);
+        $this->repo->addArtistToCooldown($artist_id);
     }
 
-    public function removeArtistFromCooldown($artist_id)
+    public function removeArtistFromCooldown($artist_id): void
     {
-        return $this->repo->removeArtistFromCooldown($artist_id);
+        $this->repo->removeArtistFromCooldown($artist_id);
     }
 
-    public function addRandomSong($rank = 1)
+    public function addRandomSong($rank): int
     {
-        $this->repo->addRandomSong($rank = 1);
+        return $this->repo->addRandomSong($rank);
     }
 
-    public function removeSong($song_id)
+    public function removeSong($song_id): void
     {
-        return $this->repo->removeSong($song_id);
+        $this->repo->removeSong($song_id);
     }
 
-    public function getRank($song_id)
+    public function getRank($song_id): int
     {
-        $this->repo->getRank($song_id);
+        return $this->repo->getRank($song_id);
     }
 
-    public function hasExpired($expires)
+    public function hasExpired($expires): bool
     {
-        $this->repo->hasExpired($expires);
+        return $this->repo->hasExpired($expires);
     }
 }
