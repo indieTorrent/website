@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function artist()
     {
-        return $this->hasOne(Artist::class, 'owner_id');
+        return $this->hasOne(MusicEntity::class, 'owner_id');
     }
 
 }
