@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 Route::namespace('Api\v1')->group(function() {
 
+    Route::prefix('account')->group(function() {
+        Route::get('/', 'AccountApiController@account');
+    });
+
     Route::prefix('featured')->group(function() {
         Route::get('/songs', 'FeaturedApiController@songs');
         Route::get('/artists', 'FeaturedApiController@artists');

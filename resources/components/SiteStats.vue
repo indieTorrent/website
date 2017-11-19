@@ -14,21 +14,22 @@
         },
         methods: {
             getAccounts() {
-                axios.get('accounts').then((response) => {
-                    // todo: count the returned collection of objects
-                    // this.num_accounts = response.data.length;
-                    this.num_accounts = 2000;
-                }).catch((error) => {
-
-                });
+                this.num_accounts = 2000;
+//                axios.get('accounts').then((response) => {
+//                    // todo: count the returned collection of objects
+//                    // this.num_accounts = response.data.length;
+//
+//                }).catch((error) => {
+//
+//                });
             },
             getTotalSpent() {
-                axios.get('imnotsure').then((response) => {
-                    // todo: do logic for this .. haha
-                    this.sum_spent = 6000;
-                }).catch((error) => {
-
-                });
+                this.sum_spent = 6000;
+//                axios.get('imnotsure').then((response) => {
+//                    // todo: do logic for this .. haha
+//                }).catch((error) => {
+//
+//                });
             },
         },
         created() {

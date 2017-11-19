@@ -1,57 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{{-- todo: break this layout up into partials and Vue Components where possible -mike --}}
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="/images/favicons/manifest.json">
-    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#cbef4f">
-    <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic'
-          rel='stylesheet'
-          type='text/css'>
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,800italic,300,600,800,400'
-          rel='stylesheet'
-          type='text/css'>
-
-    <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic'
-          rel='stylesheet'
-          type='text/css'>
-
-    <title>@yield('title')</title>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link href="css/app.css" rel="stylesheet" type="text/css">
-</head>
+@include('layouts.partials.head-meta')
 
 <body>
 <div id="app">
@@ -61,39 +10,14 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div id="container-account-and-cart-info">
                 <div class="container-fluid container-primary-nav">
-                    <div id="site-stats" class="navbar-element-group">
+
+                    {{-- site stats component --}}
+                    <site-stats></site-stats>
+
+                    {{-- top nav login form --}}
+                    @include('layouts.partials.top-login')
 
 
-                        <div class="site-stat"><strong>3638</strong> customers have created accounts.</div>
-                        <div class="site-stat">Fans have spent <strong>$6203.66</strong> on music.</div>
-
-                    </div>
-
-
-                    <form id="navbar-login-form" class="navbar-form navbar-right" method="post" action="/login/">
-                        <div class="form-group">
-                            <input id="login-username" class="form-control" name="username" type="text" value=""
-                                   placeholder="Username" maxlength="255"/>
-                        </div>
-                        <div class="form-group">
-                            <input id="login-password" class="form-control" name="password" type="password" value=""
-                                   placeholder="Password" maxlength="255"/>
-                        </div>
-
-                        <input type="hidden" name="action" value="logIn"/>
-                        <input type="hidden" name="nextPage" value=""/>
-
-                        <button id="global-sign-in-button" type="submit" class="btn btn-success">Sign in</button>
-                    </form>
-
-
-                    <div id="account-info-and-links">
-                        <div class="navbar-element-group account-and-cart-info">
-
-                            <a href="/cart/"><i class="fa fa-shopping-cart"></i> Shopping Cart</a> (0 Items, $0.00)
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
@@ -502,119 +426,10 @@
 
                 </div>
             </div>
-        </div>    </div> <!-- /container -->
-
-    <div class="container why-indietorrent">
-        <h4>Why indieTorrent?</h4>
-
-        <p>
-            The indieTorrent.org project provides an e-commerce framework that enables independent musicians to sell
-            their
-            own music while keeping all profits. Artists may join the indietorrent.org community free of charge, and are
-            free to close their accounts at any time — no long-term contract, no fine-print. <a href="/docs/">Learn More
-                &#187;</a>
-        </p>
-    </div>
-
-    <footer class="container content-container rounded-corners container-container-border">
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="social-media-container">
-                    <div class="follow-us">
-                        Follow Us
-                    </div>
-
-                    <ul class="social-media">
-                        <li>
-                            <i class="fa fa-rss-square"></i> <a
-                                    href="https://forum.indietorrent.org/feed.php?mode=news">RSS
-                                Feed</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-facebook-square"></i> <a
-                                    href="https://www.facebook.com/pages/indieTorrentorg/122218187797892">Facebook</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-twitter-square"></i> <a href="https://twitter.com/indietorrent">Twitter</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-sm-7 stat-container">
-                <ul class="totals">
-                    <li>
-                        Total Albums
-                        <div class="stat-value">280</div>
-                    </li>
-                    <li>
-                        Total Tracks
-                        <div class="stat-value">2.6<span class="stat-total-unit">K</span></div>
-                    </li>
-                    <li>
-                        Total Downloads
-                        <div class="stat-value">2<span class="stat-total-unit">K</span></div>
-                    </li>
-
-
-                </ul>
-            </div>
-
-            <div class="col-sm-3">
-                <span class="newsletter-text">Get our Newsletter</span>
-
-                <form class="form-inline newsletter" method="post" action="/newsletter-signup/">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input name="email" type="text" class="form-control" placeholder="Enter your email">
-                            <span class="input-group-btn">
-							<button class="btn btn-success" type="submit">ok</button>
-						</span>
-                        </div><!-- /input-group -->
-                    </div>
-                </form>
-            </div>
         </div>
-    </footer>
+    </div> <!-- /container -->
 
-    <footer class="container content-container rounded-corners container-container-border short">
-        <div class="row">
-            <div class="col-sm-2 hidden-xs">
-                <div class="grayscale-logo-container">
-                    <img class="grayscale-logo" src="/images/shell/indietorrent-logo-bw.svg"
-                         alt="indieTorrent Logo (Grayscale and Faded)"/>
-                </div>
-            </div>
-
-            <div class="col-sm-6 hidden-xs">
-                <ol class="breadcrumb">
-                    <li><a href="/catalog/">Browse Music</a></li>
-                    <li><a href="/auxiliary/create-account/">Sign-Up</a></li>
-                    <li><a href="/docs/">About</a></li>
-                    <li><a href="/help/">Help</a></li>
-                    <li><a href="/contact/">Contact Us</a></li>
-                    <li><a href="/login/">Sign In</a></li>
-                    <li><a href="/docs/privacy-policy/">Privacy Policy</a></li>
-                    <li><a href="/docs/online-security-policy/">Security Policy</a></li>
-                    <li><a href="/docs/terms-of-use/#9a">DMCA Info</a></li>
-                </ol>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="copyright">
-                    <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img class="cc-logo"
-                                                                                     src="/images/shell/cc-by-nc-nd.svg"
-                                                                                     alt="Creative Commons by-nc-nd Logo"/></a>
-                    <div class="copyright-text">
-                        <ul>
-                            <li>Copyleft 2008 - 2017 indieTorrent.org, LLC.</li>
-                            <li>Some rights reserved.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('layouts.partials.footer')
 
     {{-- END VUE APP CONTAINER --}}
 </div>

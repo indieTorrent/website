@@ -16,8 +16,9 @@ class UserResource extends Resource
     {
         return [
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
-            'artist' => new ArtistResource($this->artist),
+            //'profile' => new ProfileResource($this->profile),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

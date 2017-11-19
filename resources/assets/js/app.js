@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('home', require('Views/Home.vue'));
+Vue.component('site-stats', require('Components/SiteStats.vue'));
 
 const app = new Vue({
     el: '#app',
